@@ -71,10 +71,50 @@
                 </div>
             </div>
         </nav>
+        @auth
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <main class="py-4">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div>
+                                <a href="{{route('discussions.create')}}" style="width:100%; color: white;" class="btn btn-info mb-2">Create Discussion</a>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Channels
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        @foreach($channels as $channel)
+                                            <li class="list-group-item">
+                                                {{$channel->name}}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-8">
+                            @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{session('success')}}
+                                </div>
+                            @endif
+                            @yield('content')
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        @else
+            <main class="py-4">
+                @yield('content')
+            </main>
+        @endauth
+
     </div>
 </body>
 </html>
