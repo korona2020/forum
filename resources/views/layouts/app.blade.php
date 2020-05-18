@@ -79,7 +79,13 @@
 
                         <div class="col-md-4">
                             <div>
-                                <a href="{{route('discussions.create')}}" style="width:100%; color: white;" class="btn btn-info mb-2">Create Discussion</a>
+                                @auth
+                                    <a href="{{route('discussions.create')}}" style="width:100%; color: white;" class="btn btn-info mb-2">Create Discussion</a>
+                                @else
+                                    <a href="{{route('login')}}" style="width:100%; color: white;" class="btn btn-info mb-2">
+                                        Sign In
+                                    </a>
+                                @endauth
                             </div>
                             <div class="card">
                                 <div class="card-header">
