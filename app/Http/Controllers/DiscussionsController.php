@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Discussion;
 use App\Http\Requests\CreateDiscussion;
+use App\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -67,7 +68,7 @@ class DiscussionsController extends Controller
     {
         //
         return view('discussions.show')->with('discussion',$discussion)
-            ->with('replies',$discussion->replies()->paginate(1));
+            ->with('replies',$discussion->replies()->paginate(2));
     }
 
     /**
@@ -88,9 +89,10 @@ class DiscussionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateDiscussion $request)
     {
         //
+
     }
 
     /**
@@ -102,5 +104,15 @@ class DiscussionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function reply(Discussion $discussion, Reply $reply)
+    {
+        $discussion->markAsBestReply($reply);
+
+        session()->flash('success','This reply was marked as best reply');
+
+        return redirect()->back();
+
     }
 }

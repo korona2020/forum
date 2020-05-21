@@ -17,6 +17,7 @@ class CreateDiscussionsTable extends Migration
             $table->id();
             $table->integer('user_id')->unsigned()->nullable()->index();
             $table->integer('channel_id')->unsigned()->nullable()->index();
+            $table->integer('reply_id')->unsigned()->nullable()->index();
             $table->string('title');
             $table->text('content');
             $table->string('slug')->unique();
