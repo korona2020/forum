@@ -22,5 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/discussions','DiscussionsController');
 Route::resource('discussions/{discussion}/replies','RepliesController');
+Route::get('users/notifications','UsersController@notifications')->name('users.notifications');
 Route::post('discussions/{discussion}/replies/{reply}/best','DiscussionsController@reply')->name('discussions.reply');
 
